@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Tic Tac Toe 3D</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, initial-scale=1, maximum-scale=1.0">
+		
+		<script type="text/javascript" src="vendor/three.js/Three.js"></script>
+		<script type="text/javascript" src="vendor/three.js/Detector.js"></script>
+		<script type="text/javascript" src="vendor/threex/THREEx.FullScreen.js"></script>
+		<script type="text/javascript" src="vendor/threex/THREEx.WindowResize.js"></script>
+		<script type="text/javascript" src="vendor/threex/threex.domevents.js"></script>
+		<script type="text/javascript" src="vendor/three.js/TrackballControls.js"></script>
+		
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="bower_components/patternfly/dist/js/patternfly.min.js"></script>
+		
+		<link  href="css/main.css" rel="stylesheet"/>
+	</head>
+<body>
+
+<!--
+	header
+-->
+	<nav class="navbar navbar-default navbar-pf" role="navigation">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html">
+				<img src="images/logo-mini.png" alt="TicTacToe 3D - ryan hs - 23215349" />
+			</a>
+		</div>
+		
+		<div class="collapse navbar-collapse navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-utility">
+				<li><a href="" onClick="javascript:restart();return false;">Restart Game!</a></li>
+				<li><a href="readme.html">Readme.md</a></li>
+			</ul>
+		</div>
+	</nav>
+<!--
+	end header
+-->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+<!--
+	game logic
+-->
+	<!-- canvar for Game GUI -->
+	<div id="canvas-container"></div>
+
+	<script type="text/javascript" src="bower_components/tictactoejs/TicTacToe.min.js"></script>
+	<script type="text/javascript" src="js/GUI.js"></script>
+	<script type="text/javascript">
+		var gui = new GUI('canvas-container'),
+			game = new TicTacToe();
+		
+		function gameOver(){
+			$('#modal-alert .modal-title').html('Game Over!');
+			$('#modal-alert .modal-body').html(game.status() == 'draw' ? 'game draw' : game.status() + ' win');
+			$('#modal-alert').modal('show');
+		}
+		
+		function restart(){
+			game.reset();
+			gui.reset();
+		}
+		
+		gui.addMouseClickListener(function(x,  y){
+			// no more click after over
+			if(game.gameOver()) return;
+			
+			// check if tile exists
+			if(game.exists(x, y)) return;
+			
+			// make a move from click
+			var turn = game.turn();
+			game.move(x, y);
+			if(turn == 'X') gui.X(x, y);
+			if(turn == 'O') gui.O(x, y);
+			
+			// check if game over
+			if(game.gameOver()) return gameOver();
+			
+			// do AI move (random)
+			setTimeout(function(){
+				var move = game.randomMove();
+				if(game.turn() == 'X') gui.O(move.x, move.y);
+				if(game.turn() == 'O') gui.X(move.x, move.y);
+				
+				// check if game over by AI
+				if(game.gameOver()) return gameOver();
+			}, 300)
+		})
+		
+		// Start game!!
+		$(function(){ gui.init(); })
+		
+		
+		
+		
+		// just pop up to show on start up
+		$(function(){
+			if(document.cookie.indexOf('welcomeOK') != -1) return;
+			$('#modal-alert .modal-title').html('Welcome!');
+			$('#modal-alert .modal-body').html($('#welcome-text').html());
+			$('#modal-alert').modal('show');
+			document.cookie = 'welcome=welcomeOK';
+		})
+	</script>
+<!--
+	end game logic
+-->
+	
+	
+	
+	
+	
+	
+	
+	
+
+<!--
+	modal
+-->
+	<div class="modal fade" id="modal-alert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<span class="pficon pficon-close"></span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">New Game!</h4>
+			</div>
+			<div class="modal-body">
+				
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal" onClick="javascript:restart();return false;">Start Game!</button>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/template" id="welcome-text">
+		<strong>TicTacToe 3D</strong>
+		<p>
+			just a sample project with threejs in tic tac toe game :-)<br/>
+			this project i made for my finalterm in GPU subject in my master degree in ITB.
+		</p>
+		<br/>
+		<br/>
+		<table>
+			<tr>
+				<td>Name</td>
+				<td>&nbsp;:&nbsp;</td>
+				<td>Ryan hs</td>
+			</tr>
+			<tr>
+				<td>Nim</td>
+				<td>&nbsp;:&nbsp;</td>
+				<td>23215349</td>
+			</tr>
+		</table>
+	</script>
+<!--
+	end modal
+-->
+
+
+</body>
+</html>
