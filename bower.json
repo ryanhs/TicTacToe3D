@@ -1,0 +1,30 @@
+{
+  "name": "tictactoe3d",
+  "description": "tictactoe with three js",
+  "main": "index.js",
+  "authors": [
+    "ryan hs <mr.ryansilalahi@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "tic",
+    "tat",
+    "toe",
+    "demo",
+    "3d"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "tictactoejs": "^1.0.3",
+    "patternfly": "^3.3.3",
+    "showdown": "^1.3.0"
+  }
+}

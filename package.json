@@ -1,0 +1,19 @@
+{
+  "name": "tictactoe3d",
+  "version": "1.0.0",
+  "description": "tictactoe with three js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tic",
+    "tat",
+    "toe",
+    "demo",
+    "3d"
+  ],
+  "author": "ryan hs <mr.ryansilalahi@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/ryanhs/TicTacToe3D#readme"
+}

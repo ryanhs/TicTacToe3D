@@ -1,0 +1,6 @@
+.badge {
+  margin-left: 6px;
+}
+.nav-pills > li > a > .badge {
+  margin-left: 6px;
+}

@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Tic Tac Toe 3D</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, initial-scale=1, maximum-scale=1.0">
+		
+		<script type="text/javascript" src="vendor/three.js/Three.js"></script>
+		<script type="text/javascript" src="vendor/three.js/Detector.js"></script>
+		<script type="text/javascript" src="vendor/threex/THREEx.FullScreen.js"></script>
+		<script type="text/javascript" src="vendor/threex/THREEx.WindowResize.js"></script>
+		<script type="text/javascript" src="vendor/threex/threex.domevents.js"></script>
+		<script type="text/javascript" src="vendor/three.js/TrackballControls.js"></script>
+		
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="bower_components/patternfly/dist/js/patternfly.min.js"></script>
+		
+		<link  href="css/main.css" rel="stylesheet"/>
+	</head>
+<body id="credit-license">
+
+<!--
+	header
+-->
+	<nav class="navbar navbar-default navbar-pf" role="navigation">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html">
+				<img src="images/logo-mini.png" alt="TicTacToe 3D - ryan hs - 23215349" />
+			</a>
+		</div>
+		
+		<div class="collapse navbar-collapse navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-utility">
+				<li><a href="index.html">New Game!</a></li>
+				<li><a href="readme.html">Readme.md</a></li>
+			</ul>
+		</div>
+	</nav>
+<!--
+	end header
+-->
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12 col-md-6">
+				<div class="page-header page-header-bleed-right">
+					<h1>README.md</h1>
+				</div>
+				
+				<div id="readme-html"></div><br/><br/><br/>
+			</div>
+			
+			<div class="col-sm-12 col-md-6">
+				<div class="page-header page-header-bleed-right">
+					<h1>License</h1>
+				</div>
+				
+				<pre id="license-html"></pre>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="bower_components/showdown/dist/showdown.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$.get('README.md', function(text){
+				var converter = new showdown.Converter(),
+					html      = converter.makeHtml(text);
+					
+				$('#readme-html').html(html);
+			});
+			
+			$.get('LICENSE', function(text){
+				$('#license-html').html(text);
+			});
+		});
+	</script>
+
+</body>
+</html>
