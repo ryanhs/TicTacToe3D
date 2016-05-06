@@ -30,3 +30,6 @@ for X and O objects, i get it from some blog post [TicTacToe 3D game in WebGL - 
 
 ### license
 MIT
+
+### demo
+checkout this (https://ryanhs.github.io/TicTacToe3D/)
