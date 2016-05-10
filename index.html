@@ -70,7 +70,10 @@
 		
 		function gameOver(){
 			$('#modal-alert .modal-title').html('Game Over!');
-			$('#modal-alert .modal-body').html(game.status() == 'draw' ? 'game draw' : game.status() + ' win');
+			var msg = $('<h1>');
+				msg.html(game.status() == 'draw' ? 'game draw' : game.status() + ' win');
+			$('#modal-alert .modal-body').empty();
+			$('#modal-alert .modal-body').append(msg);
 			$('#modal-alert').modal('show');
 		}
 		
@@ -85,6 +88,9 @@
 			
 			// check if tile exists
 			if(game.exists(x, y)) return;
+			
+			// check if player turn, currently player always X
+			if(game.turn() == 'O') return;
 			
 			// make a move from click
 			var turn = game.turn();

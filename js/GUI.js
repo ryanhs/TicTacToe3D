@@ -64,6 +64,16 @@
 			requestAnimationFrame( animate );
 			cameraControls.update();
 			
+			// do some animation for tiles :-)
+			var id;
+			for(id in tiles){
+				if(tiles[id].material.materials[0].wireframeLinewidth >= 10)
+					tiles[id].material.materials[0].wireframe = false;
+				
+				if(tiles[id].material.materials[0].wireframeLinewidth < 10)
+					tiles[id].material.materials[0].wireframeLinewidth += 0.3; // speed
+			}
+			
 			// actually render the scene
 			renderer.render( scene, camera );
 		}
@@ -153,10 +163,14 @@
 		function addObject(object, x, y, z, callback){
 			var loader = new THREE.JSONLoader(true);
 				loader.load("js/" + object + ".js", function (Geometry, materials) {
+					//~ materials[0].wireframe = true;
 					var mesh = new THREE.Mesh(Geometry, new THREE.MeshFaceMaterial(materials)); // Creates new mesh
 						mesh.scale.set(0.1, 0.1, 0.1); // Scales down the mesh
 						mesh.position.set(x, y, z); // Positions the mesh left from the center
-						
+					
+					// add some animation?
+					mesh.material.materials[0].wireframe = true;
+					
 					scene.add(mesh); // Adds mesh to the scene
 					tiles.push(mesh); // add to tiles, for reset
 					if(callback !== undefined) callback(mesh);
